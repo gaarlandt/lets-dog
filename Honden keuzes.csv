@@ -1,0 +1,39 @@
+Ras,Min_Ruimte,Energie,Min_Ervaring,Hypoallergeen,Kindvriendelijk,Beschrijving,Aandachtspunt
+Labrador Retriever,2,3,1,FALSE,3,"Sociaal, stabiel, vriendelijk",Gevoelig voor overgewicht
+Golden Retriever,2,3,1,FALSE,3,"Zacht, intelligent, mensgericht",Gevoelig voor stress in drukke omgevingen
+Havanezer,1,2,1,TRUE,3,"Zacht, sociaal, aanhankelijk",Kan niet goed langdurig alleen zijn
+Cocker Spaniel,2,2,2,FALSE,2,"Vrolijk, gevoelig, sociaal",Gevoelig voor prikkels en harde correcties
+Poedel (medium),1,3,2,TRUE,3,"Intelligent, energiek, elegant",Vraagt mentale uitdaging en vachtverzorging
+Border Collie,3,4,3,FALSE,1,"Zeer intelligent, gefocust, energiek","Niet geschikt voor beginners, drijfinstinct"
+Australian Shepherd,2,3,2,FALSE,2,"Alert, werklustig, sociaal",Gevoelig voor verveling en onderprikkeling
+Vizsla,2,3,2,FALSE,2,"Aanhankelijk, energiek, gevoelig",Kan slecht tegen harde benadering/alleen zijn
+Weimaraner,3,3,3,FALSE,2,"Sterk, energiek, loyaal",Niet geschikt voor lange periodes alleen
+Siberische Husky,3,4,3,FALSE,2,"Onafhankelijk, energiek, sociaal",Sterk jachtinstinct; vaak niet los te lopen
+Chihuahua,1,1,1,FALSE,1,"Alert, klein, loyaal",Kwetsbaar voor ruw spel en jonge kinderen
+Franse Bulldog,1,1,1,FALSE,3,"Rustig, mensgericht, compact",Gevoelig voor hitte en ademhalingsproblemen
+Mopshond,1,1,1,FALSE,3,"Vrolijk, vriendelijk, aanhankelijk",Gevoelig voor overgewicht en ademhaling
+Maltezer,1,2,1,TRUE,2,"Zacht, aanhankelijk",Veel vachtverzorging en nabijheid nodig
+Shih Tzu,1,2,1,FALSE,2,"Zacht, rustig, vriendelijk",Oog- en vachtverzorging essentieel
+Duitse Herder,2,3,3,FALSE,2,"Loyaal, alert, werkgericht",Vraagt duidelijke structuur en begeleiding
+Rottweiler,2,3,3,FALSE,2,"Zelfverzekerd, loyaal","Consistente, consequente omgang noodzakelijk"
+Akita,2,2,3,FALSE,1,"Waardig, onafhankelijk",Niet geschikt voor drukke/chaotische omgevingen
+Dobermann,2,3,3,FALSE,2,"Alert, atletisch",Heeft mentale uitdaging en begeleiding nodig
+Bullmastiff,3,2,2,FALSE,2,"Krachtig, rustig, beschermend",Gevoelig voor hitte and gewrichtsbelasting
+Jack Russell Terrier,1,4,2,FALSE,1,"Energiek, vasthoudend","Kan snel overprikkeld raken, heeft sturing nodig"
+Yorkshire Terrier,1,2,2,FALSE,2,"Alert, slim, klein",Vraagt consequente opvoeding and vachtverzorging
+Cairn Terrier,1,3,2,FALSE,2,"Moedig, actief, onafhankelijk","Sterk jachtinstinct, vraagt duidelijke grenzen"
+Staffordshire Bull Terrier,2,3,2,FALSE,2,"Mensgericht, energiek, gevoelig","Vraagt rustige, stabiele aansturing"
+West Highland White Terrier,1,2,1,FALSE,3,"Vrolijk, alert, moedig",Regelmatige vachtverzorging nodig
+Poedel,2,3,2,TRUE,3,"Intelligent, elegant",Vacht vraagt professionele verzorging
+Bichon Frisé,1,2,1,TRUE,3,"Zacht, vrolijk, sociaal",Vachtverzorging is cruciaal
+Labradoodle,2,3,1,TRUE,3,"Aanhankelijk, slim, vriendelijk",Vacht and energielevel variëren per lijn
+Portugese Waterhond,2,4,2,TRUE,2,"Sportief, intelligent, trouw",Vraagt dagelijkse beweging and mentale uitdaging
+Whippet,1,2,1,FALSE,2,"Zacht, gevoelig, elegant",Gevoelig voor kou and harde benadering
+Berner Sennenhond,2,2,1,FALSE,3,"Zacht, rustig, loyaal",Gevoelig voor warmte and gewrichtsproblemen
+Leonberger,3,2,2,FALSE,3,"Zeer zacht, groot, rustig",Intensieve verzorging and voldoende ruimte vereist
+Cavalier King Charles,1,2,1,FALSE,3,"Zacht, vriendelijk, sociaal",Gevoelig voor hart- and oogproblemen
+Newfoundlander,3,2,2,FALSE,3,"Kalm, krachtig, zacht",Gevoelig voor hitte and gewrichten
+Mastiff,3,2,2,FALSE,2,"Krachtig, waardig, beschermend",Gevoelig voor gewrichtsproblemen and overgewicht
+Australian Cattle Dog,3,4,3,FALSE,1,"Werklustig, slim, energiek",Vraagt intensieve training and taakgerichte activiteit
+Pointer,2,3,2,FALSE,2,"Sportief, gericht, energiek","Sterk jachtinstinct, vraagt veel beweging"
+Setter,2,3,2,FALSE,2,"Zacht, actief, elegant",Veel beweging and vachtverzorging nodig

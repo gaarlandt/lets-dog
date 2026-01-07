@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="nl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Honden Matcher</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* LetsDog Colors */
+            --primary-green: #75876E;
+            /* Muted Olive - Buttons/Accents */
+            --dark-green: #172B0E;
+            /* Deep Forest - Text/Headings */
+            --bg-beige: #EFE9E4;
+            /* Warm Beige - Page Background */
+            --card-bg: #FFFFFF;
+            --accent-orange: #FFA580;
+            /* Peach - Highlights */
+            --accent-blue: #A5C3E2;
+            /* Soft Blue */
+
+            --border-radius-card: 24px;
+            --border-radius-btn: 50px;
+
+            --shadow: 0 10px 30px rgba(23, 43, 14, 0.05);
+            /* Tinted shadow */
+            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            /* Fallback for National 2 */
+            background-color: var(--bg-beige);
+            color: var(--dark-green);
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        header {
+            padding: 40px 20px 30px;
+            text-align: center;
+        }
+
+        .logo-container {
+            margin-bottom: 10px;
+        }
+
+        .main-logo {
+            max-width: 280px;
+            height: auto;
+            transition: var(--transition);
+        }
+
+        .main-logo:hover {
+            transform: scale(1.02);
+        }
+
+        .subtitle {
+            color: var(--primary-green);
+            font-size: 1.25rem;
+            font-weight: 500;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        /* Wizard Container */
+        #wizard-app {
+            width: 100%;
+            max-width: 1000px;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .step-container {
+            animation: fadeIn 0.6s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .question-header {
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .step-indicator {
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--primary-green);
+            margin-bottom: 12px;
+            display: block;
+            background: rgba(117, 135, 110, 0.1);
+            display: inline-block;
+            padding: 6px 16px;
+            border-radius: 20px;
+        }
+
+        .question-title {
+            font-size: 2.2rem;
+            margin: 10px 0;
+            font-weight: 700;
+        }
+
+        .question-description {
+            font-size: 1.2rem;
+            color: #533F34;
+            line-height: 1.6;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Cards Grid */
+        .options-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 24px;
+            margin-top: 20px;
+        }
+
+        .option-card {
+            background: var(--card-bg);
+            border: 2px solid transparent;
+            border-radius: var(--border-radius-card);
+            padding: 40px 30px;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            box-shadow: var(--shadow);
+        }
+
+        .option-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(23, 43, 14, 0.1);
+        }
+
+        .option-card.selected {
+            border-color: var(--primary-green);
+            background-color: #FAFBF9;
+        }
+
+        .card-icon {
+            height: 70px;
+            width: auto;
+            margin-bottom: 24px;
+            fill: var(--primary-green);
+        }
+
+        .option-card:hover .card-icon {
+            fill: var(--dark-green);
+        }
+
+        .card-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin: 0 0 12px 0;
+            color: var(--dark-green);
+        }
+
+        .card-desc {
+            font-size: 1rem;
+            color: #666;
+            margin-bottom: 15px;
+            line-height: 1.5;
+        }
+
+        /* Results */
+        #resultaat-sectie {
+            display: none;
+            width: 100%;
+        }
+
+        .hond-kaart {
+            background: white;
+            padding: 30px;
+            border-radius: var(--border-radius-card);
+            margin-bottom: 24px;
+            box-shadow: var(--shadow);
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            border-left: 8px solid var(--primary-green);
+        }
+
+        .result-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .match-badge {
+            background: var(--primary-green);
+            color: white;
+            padding: 8px 18px;
+            border-radius: var(--border-radius-btn);
+            font-weight: 700;
+            font-size: 0.9rem;
+            letter-spacing: 0.5px;
+        }
+
+        .hond-naam {
+            font-size: 1.8rem;
+            margin: 0;
+            color: var(--dark-green);
+        }
+
+        .specs-row {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .spec-tag {
+            background: #F4F6F3;
+            padding: 8px 16px;
+            border-radius: 12px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--dark-green);
+        }
+
+        .restart-btn {
+            background: transparent;
+            border: 2px solid var(--primary-green);
+            color: var(--primary-green);
+            padding: 14px 32px;
+            border-radius: var(--border-radius-btn);
+            font-weight: 700;
+            font-size: 1.1rem;
+            cursor: pointer;
+            margin-top: 40px;
+            transition: all 0.2s;
+        }
+
+        .restart-btn:hover {
+            background: var(--primary-green);
+            color: white;
+        }
+
+        /* SVG Icons */
+        svg {
+            pointer-events: none;
+            transition: fill 0.3s ease;
+        }
+
+        /* Progress Bar */
+        .progress-container {
+            width: 100%;
+            height: 6px;
+            background: rgba(117, 135, 110, 0.2);
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 100;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: var(--primary-green);
+            width: 0%;
+            transition: width 0.5s ease;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="progress-container">
+        <div class="progress-bar" id="progress"></div>
+    </div>
+
+    <header>
+        <div class="logo-container">
+            <img src="Lets-Dog-Logo.svg" alt="Let's Dog Logo" class="main-logo">
+        </div>
+        <div class="subtitle">Vind in 5 stappen jouw ideale maatje</div>
+    </header>
+
+    <div id="wizard-app">
+        <!-- Content will be injected here -->
+    </div>
+
+    <div id="resultaat-sectie" style="max-width: 800px; padding: 20px;">
+        <h2 style="text-align:center; margin-bottom: 30px; font-size: 2.2rem;">Jouw Beste Matches</h2>
+        <div id="resultaten-lijst"></div>
+        <div style="text-align: center;">
+            <button class="restart-btn" onclick="location.reload()">Opnieuw beginnen</button>
+        </div>
+    </div>
+
+    <script src="honden.js"></script>
+
+    <script>
+        const icons = {
+            house: `<svg viewBox="0 0 24 24" class="card-icon"><path d="M12 3L2 12h3v8h6v-6h2v6h6v-8h3L12 3zm0 4.5c1.1 0 2 .9 2 2s-.9 2-2 2-2-.9-2-2 .9-2 2-2z"/></svg>`,
+            apartment: `<svg viewBox="0 0 24 24" class="card-icon"><path d="M17 11V3H7v4H3v14h8v-4h2v4h8V11h-4zM7 19H5v-2h2v2zm0-4H5v-2h2v2zm0-4H5V9h2v2zm6 8h-2v-2h2v2zm0-4h-2v-2h2v2zm0-4h-2V9h2v2zm0-4h-2V5h2v2zm6 12h-2v-2h2v2zm0-4h-2v-2h2v2z"/></svg>`,
+            farm: `<svg viewBox="0 0 24 24" class="card-icon"><path d="M6 19v-9L2 13.5l1.5 1.5 1.5-1.5V19h8v-3l4-5.5 6 4.5L24 13l-9-7-5 3.5V6h-2v6L6 10z"/></svg>`,
+            beginner: `<svg viewBox="0 0 24 24" class="card-icon"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>`,
+            intermediate: `<svg viewBox="0 0 24 24" class="card-icon"><path d="M9 11.75c-.69 0-1.25.56-1.25 1.25s.56 1.25 1.25 1.25 1.25-.56 1.25-1.25-.56-1.25-1.25-1.25zm6 0c-.69 0-1.25.56-1.25 1.25s.56 1.25 1.25 1.25 1.25-.56 1.25-1.25-.56-1.25-1.25-1.25zM12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zM12 20c-4.41 0-8-3.59-8-8 0-.29.02-.58.05-.86 2.36-1.05 4.23-2.98 5.21-5.37C11.07 8.33 14.05 10 17.42 10c.78 0 1.53-.09 2.25-.26.21 1.01.33 2.05.33 3.1 0 4.41-3.59 8-8 8z"/></svg>`,
+            expert: `<svg viewBox="0 0 24 24" class="card-icon"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg>`,
+            sitDog: `<svg viewBox="0 0 24 24" class="card-icon"><path d="M19 13v-2c0-2.21-1.79-4-4-4H9l1.6-2.4C10.84 4.25 10.51 4 10.15 4H8.53c-.19 0-.37.07-.5.2L4.56 8.13c-.34.34-.56.8-.56 1.3v6.07c0 1.93 1.57 3.5 3.5 3.5h9c1.65 0 3-1.35 3-3v-3h-1zm-3 0h-2v-1h2v1z"/></svg>`,
+            walkDog: `<svg viewBox="0 0 24 24" class="card-icon"><path d="M21 16v-2l-2.45-2.03c-.2-.17-.46-.26-.72-.25l-2.73.08-1.57-2.61c.4-.64.65-1.39.67-2.19.03-1.2-.7-2.28-1.76-2.8-1.06-.52-2.31-.22-3.08.73L7.75 9.08c-.78.96-1.12 2.22-.84 3.47l.45 2V19c0 1.1.9 2 2 2s2-.9 2-2v-3.5l1.09-3.76 1.76 2.92-1.05 1.76c-.32.53-.29 1.18.12 1.66.41.48 1.07.6 1.61.32l5-2.5c.67-.34 1.11-1.03 1.11-1.79z"/></svg>`,
+            runDog: `<svg viewBox="0 0 24 24" class="card-icon"><path d="M16 8l-2.4 3.2L12 9.6l1.2-2.8L12 4c0-1.1-.9-2-2-2S8 2.9 8 4l.4 3.6L5.8 11h-.6c-1.1 0-2 .9-2 2v2c0 .55.45 1 1 1h.4l2.4 3h.4l3.1-4.1.9 1.5L9.6 19c-.3.8.1 1.7.9 2.1.8.3 1.7-.1 2.1-.9l1.9-3.2 2-2.5c.3-.4.5-.9.5-1.4V11c0-1.1-.9-2-2-2h-1l2-2.5z"/></svg>`,
+            sportDog: `<svg viewBox="0 0 24 24" class="card-icon"><path d="M13.5 5.5c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zM9.8 8.9L7 23h2.1l1.8-8 2.1 2v6h2v-7.5l-2.1-2 .6-3C14.8 12 16.8 13 19 13v-2c-1.9 0-3.5-1-4.3-2.4l-1-1.6c-.4-.6-1-1-1.7-1-.3 0-.5.1-.8.2L8 8v2h1.8l0-1.1z"/></svg>`,
+            kids: `<svg viewBox="0 0 24 24" class="card-icon"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg>`,
+            noKids: `<svg viewBox="0 0 24 24" class="card-icon"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-3.5-6.5l7-7M8.5 7l7 7"/></svg>`,
+            allergy: `<svg viewBox="0 0 24 24" class="card-icon"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 14h-2v-2h2v2zm0-4h-2V7h2v5z"/></svg>`,
+            noAllergy: `<svg viewBox="0 0 24 24" class="card-icon"><path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/></svg>`
+        };
+
+        const config = [
+            {
+                id: 'ruimte',
+                index: 1,
+                title: "Hoe woon je?",
+                desc: "Wil je hond veel rennen in de tuin of ligt hij liever op de bank in een appartement?",
+                options: [
+                    { value: 1, title: "Appartement", sub: "Geen tuin", icon: icons.apartment },
+                    { value: 2, title: "Rijtjeshuis", sub: "Kleine tuin", icon: icons.house },
+                    { value: 3, title: "Vrijstaand", sub: "Grote tuin / Boerderij", icon: icons.farm }
+                ]
+            },
+            {
+                id: 'ervaring',
+                index: 2,
+                title: "Wat is je ervaring?",
+                desc: "Sommige honden hebben een duidelijke hand nodig, anderen zijn makkelijker in de omgang.",
+                options: [
+                    { value: 1, title: "Beginner", sub: "Eerste eigen hond", icon: icons.beginner },
+                    { value: 2, title: "Gemiddeld", sub: "Al eerder honden gehad", icon: icons.intermediate },
+                    { value: 3, title: "Expert", sub: "Ervaren trainer", icon: icons.expert }
+                ]
+            },
+            {
+                id: 'energie',
+                index: 3,
+                title: "Hoe actief ben je?",
+                desc: "Trouwe maatjes die meer bewegen hebben ook meer energie nodig! Kies wat bij jouw levensstijl past.",
+                options: [
+                    { value: 1, title: "Niet echt actief", sub: "Liever lui dan moe (<1u)", icon: icons.sitDog },
+                    { value: 2, title: "Gemiddeld", sub: "Wandelen en spelen (1-1.5u)", icon: icons.walkDog },
+                    { value: 3, title: "Actief", sub: "Lange wandelingen (>2u)", icon: icons.runDog },
+                    { value: 4, title: "Topsport", sub: "Hardlopen & Fietsen", icon: icons.sportDog }
+                ]
+            },
+            {
+                id: 'kinderen',
+                index: 4,
+                title: "Heb je kinderen?",
+                desc: "Zoek je een hond die goed overweg kan met kinderen?",
+                options: [
+                    { value: "0", title: "Nee", sub: "Geen kinderen in huis", icon: icons.noKids },
+                    { value: "1", title: "Ja", sub: "Kinderen in huis", icon: icons.kids }
+                ]
+            },
+            {
+                id: 'allergie',
+                index: 5,
+                title: "Allergieën?",
+                desc: "Is iemand in huis allergisch voor honden?",
+                options: [
+                    { value: "0", title: "Nee", sub: "Geen allergieën", icon: icons.noAllergy },
+                    { value: "1", title: "Ja", sub: "Allergisch (Hypoallergeen)", icon: icons.allergy }
+                ]
+            }
+        ];
+
+        let state = {
+            step: 0,
+            answers: {}
+        };
+
+        function init() {
+            renderStep();
+        }
+
+        function renderStep() {
+            const container = document.getElementById('wizard-app');
+            const data = config[state.step];
+            const percent = ((state.step) / config.length) * 100;
+            document.getElementById('progress').style.width = percent + "%";
+
+            const gridStyle = data.options.length < 3 ? 'display:flex; justify-content:center; gap:30px;' : '';
+
+            let html = `
+                <div class="step-container">
+                    <div class="question-header">
+                        <span class="step-indicator">Stap ${data.index} van ${config.length}</span>
+                        <h2 class="question-title">${data.title}</h2>
+                        <p class="question-description">${data.desc}</p>
+                    </div>
+                    
+                    <div class="options-grid" style="${gridStyle}">
+                        ${data.options.map(opt => `
+                            <div class="option-card" onclick="handleChoice(${JSON.stringify(opt.value).replace(/"/g, "'")})">
+                                ${opt.icon}
+                                <h3 class="card-title">${opt.title}</h3>
+                                <div class="card-desc">${opt.sub}</div>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            `;
+            container.innerHTML = html;
+        }
+
+        window.handleChoice = function (value) {
+            const currentQ = config[state.step];
+            state.answers[currentQ.id] = value;
+            if (state.step < config.length - 1) {
+                state.step++;
+                renderStep();
+            } else {
+                document.getElementById('progress').style.width = "100%";
+                showResults();
+            }
+        };
+
+        function showResults() {
+            document.getElementById('wizard-app').style.display = 'none';
+            calculateMatches();
+        }
+
+        function calculateMatches() {
+            if (typeof hondenDatabase === 'undefined') {
+                alert("Fout: data niet geladen.");
+                return;
+            }
+            const input = {
+                ruimte: parseInt(state.answers.ruimte),
+                ervaring: parseInt(state.answers.ervaring),
+                energie: parseInt(state.answers.energie),
+                kinderen: state.answers.kinderen === "1",
+                allergie: state.answers.allergie === "1"
+            };
+            const resultaten = hondenDatabase.map(hond => {
+                let score = 100;
+                if (input.allergie && hond.hypo === 0) return { ...hond, score: -999 };
+                if (hond.ruimte > input.ruimte) score -= 50;
+                const energieVerschil = Math.abs(hond.energie - input.energie);
+                if (energieVerschil === 0) score += 10;
+                else if (energieVerschil >= 2) score -= 40;
+                else score -= 10;
+                if (hond.ervaring > input.ervaring) score -= 30;
+                if (input.kinderen) {
+                    if (hond.kind === 1) score -= 50;
+                    if (hond.kind === 3) score += 15;
+                }
+                return { ...hond, score: score };
+            });
+            resultaten.sort((a, b) => b.score - a.score);
+            toonLijst(resultaten);
+        }
+
+        function toonLijst(lijst) {
+            const container = document.getElementById('resultaten-lijst');
+            container.innerHTML = "";
+            const sectie = document.getElementById('resultaat-sectie');
+            sectie.style.display = 'block';
+            const topMatches = lijst.filter(h => h.score > 0).slice(0, 3);
+            if (topMatches.length === 0) {
+                container.innerHTML = "<div style='text-align:center; padding:40px;'><h3>Geen exacte matches gevonden</h3><p>Probeer je eisen iets aan te passen.</p></div>";
+                return;
+            }
+            topMatches.forEach((hond, index) => {
+                const div = document.createElement('div');
+                div.className = 'hond-kaart';
+                div.style.animation = `fadeIn 0.5s ease-out ${index * 0.15}s backwards`;
+                let label = "";
+                if (index === 0) label = "🏆 Beste Match";
+                else if (hond.score >= 90) label = "Top Match 🔥";
+                else label = "Goede Optie ✅";
+                div.innerHTML = `
+                    <div class="result-header">
+                        <h3 class="hond-naam">${hond.naam}</h3>
+                        <span class="match-badge">${label}</span>
+                    </div>
+                    <span style="color:#666; font-style:italic;">"${hond.desc}"</span>
+                    <div class="specs-row">
+                        <span class="spec-tag">⚡ Energie: ${hond.energie}/4</span>
+                        <span class="spec-tag">🏠 Ruimte: ${hond.ruimte}/3</span>
+                        <span class="spec-tag">🎓 Ervaring: ${hond.ervaring}/3</span>
+                    </div>
+                    ${hond.letop ? `<div style="margin-top:10px; font-size:0.9em; color:#B71C1C; background:#FFEBEE; padding:12px; border-radius:12px;">⚠️ Let op: ${hond.letop}</div>` : ''}
+                `;
+                container.appendChild(div);
+            });
+        }
+        init();
+    </script>
+</body>
+
+</html>
